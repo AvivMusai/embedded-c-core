@@ -1,0 +1,3 @@
+test_ring_buffer
+*.o
+build/

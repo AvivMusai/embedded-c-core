@@ -1,0 +1,106 @@
+# Embedded C Core
+
+A collection of low-level C components designed to practice and demonstrate
+embedded software development concepts.
+
+## Ring Buffer
+
+The first component is a fixed-capacity byte ring buffer implemented without
+dynamic memory allocation.
+
+### Features
+
+- FIFO data handling
+- Caller-provided static storage
+- Full and empty state detection
+- Index wraparound
+- Input validation
+- Unit tests using `assert`
+- Strict compiler warnings
+
+## Project Structure
+
+```text
+embedded-c-core/
+├── include/
+│   └── ring_buffer.h
+├── src/
+│   └── ring_buffer.c
+├── tests/
+│   └── test_ring_buffer.c
+├── Makefile
+├── README.md
+└── .gitignore
+
+```
+
+## Build
+
+```bash
+make
+```
+
+## Run Tests
+
+```bash
+make test
+```
+
+Expected output:
+
+```text
+All ring buffer tests passed.
+```
+
+## Clean Build Files
+
+```bash
+make clean
+```
+
+## Ring Buffer API
+
+```c
+bool ring_buffer_init(
+    ring_buffer_t *ring_buffer,
+    uint8_t *storage,
+    size_t capacity
+);
+
+bool ring_buffer_push(
+    ring_buffer_t *ring_buffer,
+    uint8_t value
+);
+
+bool ring_buffer_pop(
+    ring_buffer_t *ring_buffer,
+    uint8_t *value
+);
+
+bool ring_buffer_is_empty(
+    const ring_buffer_t *ring_buffer
+);
+
+bool ring_buffer_is_full(
+    const ring_buffer_t *ring_buffer
+);
+
+size_t ring_buffer_size(
+    const ring_buffer_t *ring_buffer
+);
+```
+
+## Concepts Demonstrated
+
+- Pointers
+- Structures
+- Fixed-width integer types
+- Output parameters
+- Static memory allocation
+- FIFO data structures
+- Modular arithmetic
+- Header and source file separation
+- Defensive input validation
+- Automated builds with Make
+
+
