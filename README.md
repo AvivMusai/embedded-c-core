@@ -96,7 +96,8 @@ size_t ring_buffer_size(
 - Structures
 - Fixed-width integer types
 - Output parameters
-- Static memory allocation
+- Caller-provided fixed-size storage
+- No dynamic memory allocation
 - FIFO data structures
 - Modular arithmetic
 - Header and source file separation
