@@ -69,6 +69,20 @@ bool ring_buffer_pop(
     return true;
 }
 
+void ring_buffer_clear(
+    ring_buffer_t *ring_buffer
+)
+{
+    if (ring_buffer == NULL)
+    {
+        return;
+    }
+
+    ring_buffer->head = 0U;
+    ring_buffer->tail = 0U;
+    ring_buffer->count = 0U;
+}
+
 bool ring_buffer_is_empty(
     const ring_buffer_t *ring_buffer
 )

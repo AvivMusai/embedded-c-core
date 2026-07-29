@@ -17,6 +17,7 @@ dynamic memory allocation.
 - Input validation
 - Unit tests using `assert`
 - Strict compiler warnings
+- Logical buffer clearing and reuse
 
 ## Project Structure
 
@@ -75,6 +76,10 @@ bool ring_buffer_push(
 bool ring_buffer_pop(
     ring_buffer_t *ring_buffer,
     uint8_t *value
+);
+
+void ring_buffer_clear(
+    ring_buffer_t *ring_buffer
 );
 
 bool ring_buffer_is_empty(

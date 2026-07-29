@@ -133,12 +133,43 @@ static void test_invalid_operations(void)
     assert(!ring_buffer_is_full(NULL));
 }
 
+static void test_clear(void)
+{
+    uint8_t storage[3];
+    ring_buffer_t ring_buffer;
+    uint8_t value = 0U;
+
+    assert(ring_buffer_init(
+        &ring_buffer,
+        storage,
+        3U
+    ));
+
+    assert(ring_buffer_push(&ring_buffer, 10U));
+    assert(ring_buffer_push(&ring_buffer, 20U));
+
+    assert(ring_buffer_size(&ring_buffer) == 2U);
+
+    ring_buffer_clear(&ring_buffer);
+
+    assert(ring_buffer_is_empty(&ring_buffer));
+    assert(ring_buffer_size(&ring_buffer) == 0U);
+    assert(!ring_buffer_pop(&ring_buffer, &value));
+
+    assert(ring_buffer_push(&ring_buffer, 30U));
+    assert(ring_buffer_pop(&ring_buffer, &value));
+    assert(value == 30U);
+
+    ring_buffer_clear(NULL);
+}
+
 int main(void)
 {
     test_basic_fifo();
     test_wraparound();
     test_invalid_initialization();
     test_invalid_operations();
+    test_clear();
 
     printf("All ring buffer tests passed.\n");
 

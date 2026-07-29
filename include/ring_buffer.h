@@ -30,6 +30,10 @@ bool ring_buffer_pop(
     uint8_t *value
 );
 
+void ring_buffer_clear(
+    ring_buffer_t *ring_buffer
+);
+
 bool ring_buffer_is_empty(
     const ring_buffer_t *ring_buffer
 );
