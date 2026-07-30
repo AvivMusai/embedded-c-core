@@ -19,15 +19,33 @@ dynamic memory allocation.
 - Strict compiler warnings
 - Logical buffer clearing and reuse
 
+## Command Parser
+
+A fixed-capacity command parser that separates a mutable input string into a
+command and arguments without dynamic memory allocation.
+
+### Features
+
+- In-place parsing
+- Up to four command arguments
+- Space, tab, carriage-return, and newline handling
+- Empty-input validation
+- Maximum-argument validation
+- Caller-owned input storage
+- Unit tests using `assert`
+
 ## Project Structure
 
 ```text
 embedded-c-core/
 ├── include/
+│   ├── command_parser.h
 │   └── ring_buffer.h
 ├── src/
+│   ├── command_parser.c
 │   └── ring_buffer.c
 ├── tests/
+│   ├── test_command_parser.c
 │   └── test_ring_buffer.c
 ├── Makefile
 ├── README.md
@@ -94,6 +112,14 @@ size_t ring_buffer_size(
     const ring_buffer_t *ring_buffer
 );
 ```
+## Command Parser API
+
+```c
+bool command_parser_parse(
+    char *input,
+    parsed_command_t *parsed_command
+);
+```
 
 ## Concepts Demonstrated
 
@@ -108,5 +134,9 @@ size_t ring_buffer_size(
 - Header and source file separation
 - Defensive input validation
 - Automated builds with Make
+- In-place string parsing
+- String tokenization
+- Fixed-capacity argument handling
+- Boundary testing
 
 
