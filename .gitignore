@@ -2,3 +2,4 @@ test_ring_buffer
 test_command_parser
 *.o
 build/
+test_device_fsm

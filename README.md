@@ -34,23 +34,41 @@ command and arguments without dynamic memory allocation.
 - Caller-owned input storage
 - Unit tests using `assert`
 
+## Device Finite State Machine
+
+A table-driven finite state machine that models device states, events, valid
+transitions, fault handling, and invalid-event rejection.
+
+### Features
+
+- Explicit device states and events using enums
+- Table-driven state transitions
+- Normal power and execution lifecycle
+- Fault and reset handling
+- Invalid-transition rejection
+- State preservation after invalid events
+- Null-pointer validation
+- Unit tests covering every valid transition
+
 ## Project Structure
 
 ```text
 embedded-c-core/
 ├── include/
 │   ├── command_parser.h
+│   ├── device_fsm.h
 │   └── ring_buffer.h
 ├── src/
 │   ├── command_parser.c
+│   ├── device_fsm.c
 │   └── ring_buffer.c
 ├── tests/
 │   ├── test_command_parser.c
+│   ├── test_device_fsm.c
 │   └── test_ring_buffer.c
 ├── Makefile
 ├── README.md
 └── .gitignore
-
 ```
 
 ## Build
@@ -121,6 +139,23 @@ bool command_parser_parse(
 );
 ```
 
+## Device FSM API
+
+```c
+void device_fsm_init(
+    device_fsm_t *fsm
+);
+
+bool device_fsm_handle_event(
+    device_fsm_t *fsm,
+    device_event_t event
+);
+
+device_state_t device_fsm_get_state(
+    const device_fsm_t *fsm
+);
+```
+
 ## Concepts Demonstrated
 
 - Pointers
@@ -138,5 +173,10 @@ bool command_parser_parse(
 - String tokenization
 - Fixed-capacity argument handling
 - Boundary testing
+- Enumerations for states and events
+- Finite state machine design
+- Table-driven state transitions
+- Valid and invalid transition handling
+- State preservation after rejected events
 
 
