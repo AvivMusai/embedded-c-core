@@ -50,19 +50,38 @@ transitions, fault handling, and invalid-event rejection.
 - Null-pointer validation
 - Unit tests covering every valid transition
 
+## Bit Utilities
+
+A reusable set of 8-bit bit-manipulation utilities for setting, clearing,
+toggling, and testing individual bits.
+
+### Features
+
+- Set individual bits
+- Clear individual bits
+- Toggle individual bits
+- Test whether a bit is set
+- Bit-mask generation using left shifts
+- Invalid bit-index validation
+- Fixed-width `uint8_t` operations
+- Unit tests covering normal and invalid inputs
+
 ## Project Structure
 
 ```text
 embedded-c-core/
 ├── include/
+│   ├── bit_utils.h
 │   ├── command_parser.h
 │   ├── device_fsm.h
 │   └── ring_buffer.h
 ├── src/
+│   ├── bit_utils.c
 │   ├── command_parser.c
 │   ├── device_fsm.c
 │   └── ring_buffer.c
 ├── tests/
+│   ├── test_bit_utils.c
 │   ├── test_command_parser.c
 │   ├── test_device_fsm.c
 │   └── test_ring_buffer.c
@@ -87,6 +106,9 @@ Expected output:
 
 ```text
 All ring buffer tests passed.
+All command parser tests passed.
+All device FSM tests passed.
+All bit utils tests passed.
 ```
 
 ## Clean Build Files
@@ -156,6 +178,30 @@ device_state_t device_fsm_get_state(
 );
 ```
 
+## Bit Utilities API
+
+```c
+uint8_t bit_set(
+    uint8_t value,
+    uint8_t bit
+);
+
+uint8_t bit_clear(
+    uint8_t value,
+    uint8_t bit
+);
+
+uint8_t bit_toggle(
+    uint8_t value,
+    uint8_t bit
+);
+
+bool bit_is_set(
+    uint8_t value,
+    uint8_t bit
+);
+```
+
 ## Concepts Demonstrated
 
 - Pointers
@@ -178,5 +224,8 @@ device_state_t device_fsm_get_state(
 - Table-driven state transitions
 - Valid and invalid transition handling
 - State preservation after rejected events
-
-
+- Bitwise AND, OR, XOR, and NOT
+- Bit masks
+- Left-shift operations
+- Set, clear, toggle, and test bit operations
+- Invalid bit-index handling
