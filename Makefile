@@ -6,11 +6,13 @@ CPPFLAGS := -Iinclude
 RING_BUFFER_TEST := test_ring_buffer
 COMMAND_PARSER_TEST := test_command_parser
 DEVICE_FSM_TEST := test_device_fsm
+BIT_UTILS_TEST := test_bit_utils
 
 TEST_TARGETS := \
-	$(RING_BUFFER_TEST) \
-	$(COMMAND_PARSER_TEST) \
-	$(DEVICE_FSM_TEST)
+        $(RING_BUFFER_TEST) \
+        $(COMMAND_PARSER_TEST) \
+        $(DEVICE_FSM_TEST) \
+        $(BIT_UTILS_TEST)
 
 .PHONY: all test clean
 
@@ -43,10 +45,20 @@ $(DEVICE_FSM_TEST): \
 	tests/test_device_fsm.c \
 	-o $(DEVICE_FSM_TEST)
 
+$(BIT_UTILS_TEST): \
+        src/bit_utils.c \
+        tests/test_bit_utils.c \
+        include/bit_utils.h
+	$(CC) $(CFLAGS) $(CPPFLAGS) \
+        src/bit_utils.c \
+        tests/test_bit_utils.c \
+        -o $(BIT_UTILS_TEST)
+
 test: $(TEST_TARGETS)
 	./$(RING_BUFFER_TEST)
 	./$(COMMAND_PARSER_TEST)
 	./$(DEVICE_FSM_TEST)
+	./$(BIT_UTILS_TEST)
 
 clean:
 	rm -f $(TEST_TARGETS)

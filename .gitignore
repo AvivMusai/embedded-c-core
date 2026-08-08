@@ -3,3 +3,4 @@ test_command_parser
 *.o
 build/
 test_device_fsm
+test_bit_utils
